@@ -19,14 +19,14 @@ WORKDIR /src
 # Copy package files
 COPY package.json package-lock.json* ./
 
-# Install dependencies
-RUN npm ci --only=production && npm cache clean --force
+# Install all dependencies (needed for gulp build)
+RUN npm ci && npm cache clean --force
 
 # Copy application files
 COPY . .
 
-# Build application (if needed)
-RUN npm run build || true
+# Build application (produces bin/server and bin/client)
+RUN npm run build
 
 #############################
 # Final (minimal) stage
@@ -41,10 +41,14 @@ RUN addgroup -g 1001 -S appuser && adduser -u 1001 -S -G appuser appuser
 
 WORKDIR /app
 
-# Copy application files from builder
-COPY --from=builder --chown=appuser:appuser /src /app
+# Copy only what's needed at runtime: package files, config, built bin/
+COPY --from=builder /src/package.json /src/package-lock.json* ./
+COPY --from=builder /src/config.js ./
+COPY --from=builder /src/bin ./bin
 
-# Change ownership to non-root user
+# Install production dependencies only
+RUN npm ci --only=production && npm cache clean --force
+
 RUN chown -R appuser:appuser /app
 
 USER appuser
@@ -67,7 +71,8 @@ EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=3s --start-period=15s --retries=3 \
     CMD curl -f http://localhost:3000/ || exit 1
 
-ENTRYPOINT ["npm", "start"]
+# Run server directly (no gulp at runtime)
+ENTRYPOINT ["node", "bin/server/server.js"]
 CMD []
 
 # Example build:
