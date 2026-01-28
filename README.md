@@ -137,23 +137,23 @@ FAQ
 
   This is a clone of the game [Agar.IO](http://agar.io/). Someone said that Agar.IO is a clone of an iPad game called Osmos, but we haven't tried it yet. (Cloneception? :P)
   
-1. **Why would you make a clone of this game?**
+2. **Why would you make a clone of this game?**
 
   Well, while the original game is still online, it is closed-source, and sometimes, it suffers from massive lag. That's why we want to make an open source version of it: for educational purposes, and to let the community add the features that they want, self-host it on their own servers, have fun with friends and more.
   
-1. **Any plans on adding an online server to compete with Agar.IO or making money out of it?**
+3. **Any plans on adding an online server to compete with Agar.IO or making money out of it?**
 
   No. This game belongs to the open-source community, and we have no plans on making money out of it nor competing with anything. But you can of course create your own public server, let us know if you do so and we can add it to our Live Demos list!
   
-1. **Can I deploy this game to my own server?**
+4. **Can I deploy this game to my own server?**
 
   Sure you can! That's what it's made for! ;)
   
-1. **I don't like HTML5 canvas. Can I write my own game client with this server?**
+5. **I don't like HTML5 canvas. Can I write my own game client with this server?**
 
   Of course! As long as your client supports WebSockets, you can write your game client in any language/technology, even with Unity3D if you want (there is an open source library for Unity to communicate with WebSockets)!
   
-1. **Can I use some code of this project on my own?**
+6. **Can I use some code of this project on my own?**
 
   Yes you can.
 
